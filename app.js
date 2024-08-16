@@ -1,13 +1,11 @@
 const express = require('express');
-const connectDB = require('./db')
+const connectDB = require('./db');
 const Product = require('./product');
 
 const app = express();
 app.use(express.json());
 
 connectDB();
-
-
 
 app.get('/products', async (req, res) => {
     try {
@@ -19,7 +17,6 @@ app.get('/products', async (req, res) => {
     }
 });
 
-
 app.get('/products/:id', async (req, res) => {    //http://localhost:3000/products/1
     try {
         const product = await Product.findById(req.params.id);
@@ -30,8 +27,6 @@ app.get('/products/:id', async (req, res) => {    //http://localhost:3000/produc
         res.status(500).send(error.message);
     }
 });
-
-
 
 app.post('/products', async (req, res) => {    //http://localhost:3000/products/1
     try {
@@ -45,7 +40,6 @@ app.post('/products', async (req, res) => {    //http://localhost:3000/products/
     }
 });
 
-
 app.put('/products/:id', async (req, res) => {    //http://localhost:3000/products/1
     try {
         const product = await Product.findByIdAndUpdate(req.params.id, req.body, {new: true});
@@ -57,7 +51,6 @@ app.put('/products/:id', async (req, res) => {    //http://localhost:3000/produc
     }
 });
 
-
 app.delete('/products/:id', async (req, res) => {    //http://localhost:3000/products/1
     try {
         const product = await Product.findByIdAndDelete(req.params.id);
@@ -68,7 +61,6 @@ app.delete('/products/:id', async (req, res) => {    //http://localhost:3000/pro
         res.status(500).send(error.message);
     }
 });
-
 
 const port = 5000;
 
